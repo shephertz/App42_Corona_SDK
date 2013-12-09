@@ -38,3 +38,29 @@ end
  
 ![LeaderBoard](https://raw.github.com/shephertz/App42_Corona_SDK/master/sample/App42-LeaderBoard-Sample/images/Lua-leaderBoard.png)
 
+
+* This illustrates leaderBoard operation 
+* Users login and from menu he/she can see Leader board for his game.
+* On the backend we just uses the getTopNRankers Function from lua SDK
+
+```
+App42API:initialize("<Enter_your_APIKey>","<Enter_your_secret_key>")
+local scoreBoardService = App42API:buildScoreBoardService()
+local gameName = "<Your_Game/Level_Name>" -- Created in Step #4
+local max = 5
+scoreBoardService:getTopNRankers(gameName,max, App42ScoreBoardCallBack)
+
+function App42ScoreBoardCallBack:onSuccess(object)
+	print("Game Name is : "..object:getName())
+	for l=1, table.getn(object:getScoreList()) do
+		print("User Name is : "..object:getScoreList()[l]:getUserName())
+		print("Score is : "..object:getScoreList()[l]:getValue())
+	end
+end
+function App42ScoreBoardCallBack:onException(object)
+	print("Message is : "..object:getMessage())
+	print("App Error Code is : "..object:getAppErrorCode())
+	print("Http Error Code is : "..object:getHttpErrorCode())
+	print("Error Detail is : "..object:getDetails())
+end
+```
