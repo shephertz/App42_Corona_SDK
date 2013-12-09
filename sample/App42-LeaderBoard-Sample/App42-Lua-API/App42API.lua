@@ -8,7 +8,7 @@ local defaultACL = ""
 local loggedInUser =""
 local userSessionId = ""
 
-function App42API:intialize(_apiKey,_secretKey)
+function App42API:initialize(_apiKey,_secretKey)
   self.apiKey = _apiKey  
   self.secretKey = _secretKey
 end
