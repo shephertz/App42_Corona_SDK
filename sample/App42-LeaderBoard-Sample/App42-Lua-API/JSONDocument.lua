@@ -1,7 +1,7 @@
 --author Himanshu Sharma
 local JSONDocument = {}
 local jsonDoc = ""
-local createdAt= nil
+local createdAt= ""
 local updatedAt= nil
 local docId = nil
 local owner = nil

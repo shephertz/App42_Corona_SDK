@@ -53,7 +53,7 @@ function GameResponseBuilder:buildGameObject(jsonObject)
         score[i] = GameResponseBuilder:buildScoreObjectFromJSONTree(scoreJSONArray[i])
         if scoreJSONArray[i].facebookProfile ~=nil then 
             facebookProfile = GameResponseBuilder:buildFaceFookObjectFromJSONTree(scoreJSONArray[i].facebookProfile)
-            score[i]:setFacebookList(facebookProfile)
+            score[i]:setFacebookProfile(facebookProfile)
         end
         game:setScoreList(score)
       end
@@ -61,7 +61,7 @@ function GameResponseBuilder:buildGameObject(jsonObject)
         score = GameResponseBuilder:buildScoreObjectFromJSONTree(scoreJSONArray)
         if scoreJSONArray.facebookProfile ~=nil then 
             facebookProfile = GameResponseBuilder:buildFaceFookObjectFromJSONTree(scoreJSONArray.facebookProfile)
-            score:setFacebookList(facebookProfile)
+            score:setFacebookProfile(facebookProfile)
         end
         game:setScoreList(score)
     end

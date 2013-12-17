@@ -26,7 +26,7 @@ function RewardResponseBuilder:buildArrayResponse(responseString)
   local rewardsJSONObj = App42ResponseBuilder:getServiceJSONObject("rewards",responseString)
   local rewardJSONObjectArray = rewardsJSONObj.reward
   if table.getn(rewardJSONObjectArray) > 0 then
-    for i=0, table.getn(rewardJSONObjectArray) do
+    for i=1, table.getn(rewardJSONObjectArray) do
       reward = RewardResponseBuilder:buildRewardObject(rewardJSONObjectArray[i])
       reward:setStrResponse(responseString)
       reward:setResponseSuccess(App42ResponseBuilder:isResponseSuccess(responseString))

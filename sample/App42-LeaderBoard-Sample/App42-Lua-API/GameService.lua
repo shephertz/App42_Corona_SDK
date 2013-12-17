@@ -6,20 +6,20 @@ local App42Log = require("App42-Lua-API.App42Log")
 local Util  = require("App42-Lua-API.Util")
 local JSON = require("App42-Lua-API.JSON")
 local GameService =  {}
-local queryParams =  {} 
-local orderByDescending = "" 
-local orderByAscending = ""
+local queryParams =   {}
+local orderByDescending = nil 
+local orderByAscending = nil
 local pageOffset = -1
 local pageMaxRecords = -1
 local aclList = {}
-local adminKey = ""
-local fbAccessToken = ""
-local sessionId = ""
+local adminKey = nil
+local fbAccessToken = nil
+local sessionId = nil
 local selectKeys = {}
 local otherMetaHeaders = {} 
 local gameJson ={}
-local app42 = {}    
-local game =  {}   
+local app42 = {} 
+local game =  {}  
 local resource = "game"
 local version = "1.0"
 
@@ -28,8 +28,9 @@ local version = "1.0"
 --description - Description of the game to be created
 --callback - Callback object for success/exception result
 function GameService:createGame(gameName,description,callBack)
-  if gameName==nil or gameName=="" or Util:trim(gameName)=="" or description==nil or description=="" or Util:trim(description) then
-    Util:throwExceptionIfNullOrBlank(gameName,"GameName", callBack)
+  
+  if gameName == nil or gameName== "" or Util:trim(gameName)=="" or description==nil or description=="" or Util:trim(description) == "" then
+     Util:throwExceptionIfNullOrBlank(gameName,"GameName", callBack)
     Util:throwExceptionIfNullOrBlank(description,"Description", callBack)
   else
     local signParams =  App42Service:populateSignParams()
@@ -100,7 +101,7 @@ end
 --max - Maximum number of records to be fetched
 --offset - From where the records are to be fetched
 --callback - Callback object for success/exception result
-function GameService:getAllGamesByPaging(max,offset,callBack)
+function GameService:getAllGamesWithPaging(max,offset,callBack)
   local signParams =App42Service:populateSignParams()
   local metaHeaderParams = App42Service:populateMetaHeaderParams()
   local headerParams= App42Service:merge(signParams,metaHeaderParams)

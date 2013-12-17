@@ -5,6 +5,7 @@ local recordCount
 local collectionName = ""
 local success= false
 local json = ""
+local totalRecords
 local jsonDocList = require("App42-Lua-API.JSONDocument")
 
 function Storage:new()
@@ -48,5 +49,11 @@ function Storage:setResponseSuccess(_success)
 end
 function Storage:getResponseSuccess()
     return self.success  
+end
+function Storage:getTotalRecords()
+    return self.totalRecords
+end
+function Storage:setTotalRecords(_totalRecords)
+    self.totalRecords = _totalRecords  
 end
 return Storage

@@ -9,6 +9,7 @@ local json = nil
 local success = false
 local accountLocked = false
 local profile = {}
+local totalRecords
 
 function User:new()
   o = {}
@@ -63,5 +64,11 @@ function User:setResponseSuccess(_success)
 end
 function User:getResponseSuccess()
     return self.success  
+end
+function User:getTotalRecords()
+    return self.totalRecords
+end
+function User:setTotalRecords(_totalRecords)
+    self.totalRecords = _totalRecords  
 end
 return User

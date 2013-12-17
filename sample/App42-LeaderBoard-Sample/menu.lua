@@ -115,7 +115,7 @@ function scene:createScene( event )
     cornerRadius = 2,
     onEvent = function(event) 
       if "ended" == event.phase then
-        userService:logOut(userSessionId,logoutUserCallBack)
+        userService:logout(userSessionId,logoutUserCallBack)
       end
     end
   }

@@ -6,10 +6,10 @@ local App42API = require("App42-Lua-API.App42API")
 local App42Log = require("App42-Lua-API.App42Log")
 local Util  = require("App42-Lua-API.Util")
 local JSON = require("App42-Lua-API.JSON")
-local adminKey = ""
-local fbAccessToken = ""
-local sessionId = ""
-local otherMetaHeaders = {} 
+local adminKey = nil
+local fbAccessToken = nil
+local sessionId = nil
+local otherMetaHeaders = nil 
 local resource = "customCode"
 local version = "1.0"
 -- Runs custom code deployed in the App42 Cloud in async mode.
@@ -17,8 +17,8 @@ local version = "1.0"
 -- jsonBody - Request Body in JSON format
 -- callback - Callback object for success/exception result
 function CustomCodeService:runJavaCode(serviceName,jsonObject,callBack)
-  if serviceName == nil or serviceName == "" or Util:trim(serviceName) then
-       Util:throwExceptionIfNullOrBlank(serviceName,"ServiceName", callBack)    
+  if serviceName == nil or serviceName == "" or Util:trim(serviceName) =="" then
+       Util:throwExceptionIfNullOrBlank(serviceName,"ServiceName", callBack)
   else
     local queryParams = {}
     local signParams =App42Service:populateSignParams()

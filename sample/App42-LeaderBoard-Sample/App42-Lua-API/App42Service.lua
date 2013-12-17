@@ -6,21 +6,21 @@ local Util = require("App42-Lua-API.Util")
 local JSON  = require("App42-Lua-API.JSON")
 local App42Service = {}
 local version  = "1.0"
-local sessionId =""
-local adminKey  = ""
-local secretKey = ""
-local orderByDescending = "" 
-local orderByAscending = ""
+local sessionId =nil
+local adminKey  = nil
+local secretKey = nil
+local orderByDescending = nil 
+local orderByAscending = nil
 local pageOffset = -1
 local pageMaxRecords = -1
 local otherMetaHeaders  = {}
 local sessionInvalidate = false;
 local event = ""
 local selectKeys = {}
-local defaultACL  = {}
-local aclList  = {}
-local geoTag = {}
-local fbAccessToken = ""
+local defaultACL  = nil
+local aclList  = nil
+local geoTag = nil
+local fbAccessToken = nil
 
 function App42Service:getAdminKey()
   return adminKey
@@ -108,7 +108,6 @@ local signParams = {}
   if fbAccessToken ~= nil and fbAccessToken ~= "" then
     signParams.fbAccessToken = fbAccessToken
   end
-  App42Log:debug("SignParams is : "..JSON:encode(signParams))
   return signParams
 end   
 function App42Service:populateMetaHeaderParams()
@@ -124,7 +123,7 @@ function App42Service:populateMetaHeaderParams()
     metaHeadersParams.event = event
   end
   if geoTag ~= nil then
-    metaHeadersParams.geoTag = geoTag
+    metaHeadersParams.geoTag = JSON:encode(geoTag)
   end
   local selectJSONKeys = {}
   if selectKeys ~= nil then
