@@ -1,8 +1,9 @@
 local JSON  = require("App42-Lua-API.JSON")
+local App42Exception  = require("App42-Lua-API.App42Exception")
 local App42ExceptionRequest = {}
 
 function App42ExceptionRequest:buildInternalExceptionRequest(exceptionString)
-  local app42Exception  = require("App42-Lua-API.App42Exception")
+  local app42Exception  = App42Exception:new()
     app42Exception:setMessage(exceptionString)
     app42Exception:setAppErrorCode("null")
     app42Exception:setHttpErrorCode("null")
@@ -10,7 +11,7 @@ function App42ExceptionRequest:buildInternalExceptionRequest(exceptionString)
   return app42Exception
 end
 function App42ExceptionRequest:buildExceptionRequest(exceptionString)
-  local app42Exception  = require("App42-Lua-API.App42Exception")
+  local app42Exception  = App42Exception:new()
   local jsonObj = JSON:decode(exceptionString)
   local jsonObjApp42 = jsonObj.app42Fault
   app42Exception:setMessage(jsonObjApp42.message) 

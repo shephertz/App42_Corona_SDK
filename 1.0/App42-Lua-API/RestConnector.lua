@@ -20,7 +20,8 @@ function RestConnector:executePost(resourceUrl,queryParams,bodyPayLoad,headerPar
   populateHeaders.resource = nil
   paramsRequest.headers = populateHeaders
   paramsRequest.body = bodyPayLoad
-  local uri  = baseURL..resourceUrl..queryString
+  local encodedURL = string.gsub(Util:urlEncode(resourceUrl),"%W2F","/")
+  local uri  = baseURL.. string.gsub(encodedURL,"+","%%20")..queryString
   App42Log:debug("uri is : "..uri)
   local handler = function (event)
   local exceptionObject = {}
@@ -54,7 +55,8 @@ end
   populateHeaders.resource = nil
   paramsRequest.headers = populateHeaders
   paramsRequest.body = bodyPayLoad
-  local uri  = baseURL..resourceUrl..queryString
+  local encodedURL = string.gsub(Util:urlEncode(resourceUrl),"%W2F","/")
+  local uri  = baseURL.. string.gsub(encodedURL,"+","%%20")..queryString
   App42Log:debug("uri is : "..uri)
   local handler = function (event)
   local exceptionObject = {}
@@ -88,7 +90,8 @@ function RestConnector:executePut(resourceUrl,queryParams,bodyPayLoad,headerPara
   populateHeaders.resource = nil
   paramsRequest.headers = populateHeaders
   paramsRequest.body = bodyPayLoad
-  local uri  = baseURL..resourceUrl..queryString
+  local encodedURL = string.gsub(Util:urlEncode(resourceUrl),"%W2F","/")
+  local uri  = baseURL.. string.gsub(encodedURL,"+","%%20")..queryString
   App42Log:debug("Requested URL is : "..uri)
   local handler = function (event)
   local exceptionObject = {}
@@ -123,7 +126,8 @@ end
   populateHeaders.isArray = nil
   populateHeaders.resource = nil
   paramsRequest.headers = populateHeaders
-  local uri  = baseURL..resourceUrl..queryString
+ local encodedURL = string.gsub(Util:urlEncode(resourceUrl),"%W2F","/")
+  local uri  = baseURL.. string.gsub(encodedURL,"+","%%20")..queryString
   App42Log:debug("Request URI is : "..uri)
   local handler = function (event)
   local exceptionObject = {}
@@ -157,7 +161,8 @@ function RestConnector:executeDelete(resourceUrl,queryParams,headerParams,callBa
   local populateHeaders  = App42Service:populateHeaders(headerParams)
   populateHeaders.resource = nil
   paramsRequest.headers = populateHeaders
-  local uri  = baseURL..resourceUrl..queryString
+  local encodedURL = string.gsub(Util:urlEncode(resourceUrl),"%W2F","/")
+  local uri  = baseURL.. string.gsub(encodedURL,"+","%%20")..queryString
   App42Log:debug("Request URI is : "..uri)
   local handler = function (event)
   local exceptionObject = {}

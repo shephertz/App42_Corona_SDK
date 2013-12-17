@@ -5,7 +5,7 @@ local json = ""
 local name = ""
 local description = ""
 local success = false
-
+local totalRecords
 function Game:new()
   o = {}
   setmetatable(o, self)
@@ -42,5 +42,11 @@ function Game:setResponseSuccess(_success)
 end
 function Game:getResponseSuccess()
     return self.success  
+end
+function Game:getTotalRecords()
+    return self.totalRecords
+end
+function Game:setTotalRecords(_totalRecords)
+    self.totalRecords = _totalRecords  
 end
 return Game

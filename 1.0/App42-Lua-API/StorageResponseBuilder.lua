@@ -3,13 +3,15 @@ local  App42ResponseBuilder = require("App42-Lua-API.App42ResponseBuilder")
 local JSON = require("App42-Lua-API.JSON")
 local ACL = require("App42-Lua-API.ACL")
 local JSONDocument = require("App42-Lua-API.JSONDocument")
+local GeoTag = require("App42-Lua-API.GeoTag")
+local Storage = require("App42-Lua-API.Storage")
 local StorageResponseBuilder = {}
 
 function StorageResponseBuilder:buildResponse(jsonString)
   local storage = require("App42-Lua-API.Storage")
   local storageJSONObj = App42ResponseBuilder:getServiceJSONObject("storage",jsonString)
     if(storageJSONObj == nil) then 
-      storage:setStrResponse(json)
+      storage:setStrResponse(jsonString)
       storage:setResponseSuccess(App42ResponseBuilder:isResponseSuccess(jsonString))
       storage:setTotalRecords(App42ResponseBuilder:getTotalRecords(jsonString))
     else 
@@ -59,7 +61,7 @@ function StorageResponseBuilder:buildJsonDocument(documentJSON)
     end
     if documentJSON["loc"] ~=nil then 
       local locationJSONArray = documentJSON["loc"]
-      local geoTag = require("App42-Lua-API.GeoTag")
+      local geoTag =GeoTag:new()
         geoTag:setLat(locationJSONArray[1])
         geoTag:setLng(locationJSONArray[2])
       jsonDcoument:setLocation(geoTag)
@@ -83,7 +85,7 @@ function StorageResponseBuilder:buildJsonDocument(documentJSON)
   return jsonDcoument
 end
 function StorageResponseBuilder:buildObjectFromJSONTree(jsonObject)
-  local object  = require("App42-Lua-API.Storage")
+  local object  = Storage:new()
   if(jsonObject.dbName ~= nil)then
     object:setDbName(jsonObject.dbName)
   end

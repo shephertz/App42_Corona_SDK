@@ -7,22 +7,22 @@ local Util  = require("App42-Lua-API.Util")
 local JSON = require("App42-Lua-API.JSON")
 local resource = "game/scoreboard"
 local version = "1.0"
-local orderByDescending = "" 
-local orderByAscending = ""
+local orderByDescending = nil 
+local orderByAscending = nil
 local pageOffset = -1
 local pageMaxRecords = -1
 local aclList = {}
-local adminKey = ""
-local fbAccessToken = ""
-local sessionId = ""
+local adminKey = nil
+local fbAccessToken = nil
+local sessionId = nil
 local selectKeys = {}
-local otherMetaHeaders = {} 
+local otherMetaHeaders = {}
 local ScoreBoardService = {}
 local scoresJson = {}
 local scoreJson = {}
 local gameJson = {}
 local app42 = {}    
-local game = {}  
+local game = {}
 --Saves the User score for a game in async mode.
 --gameName - Name of the game for which score has to be saved
 --userName - The user for which score has to be saved
@@ -31,8 +31,7 @@ local game = {}
 function ScoreBoardService:saveUserScore(gameName,userName,gameScore,callBack)
   if userName==nil or userName=="" or Util:trim(userName)=="" or gameName==nil or gameName=="" or Util:trim(gameName)=="" then
       Util:throwExceptionIfNullOrBlank(userName,"UserName", callBack)
-      Util:throwExceptionIfNullOrBlank(gameName,"GameName", callBack)
-      Util:throwExceptionIfNullOrBlank(emailId,"EmailId", callBack)    
+      Util:throwExceptionIfNullOrBlank(gameName,"GameName", callBack) 
   else
       local queryParams= {}
       local signParams =App42Service:populateSignParams()
@@ -286,12 +285,13 @@ function ScoreBoardService:getTopRankingsByGroup(gameName,userList,callBack)
   if gameName==nil or gameName=="" or Util:trim(gameName)==""  then
     Util:throwExceptionIfNullOrBlank(gameName,"GameName", callBack)
   else
-    local queryParams= {}
+      local queryParams ={}
     local signParams =App42Service:populateSignParams()
     local metaHeaderParams = App42Service:populateMetaHeaderParams()
     local headerParams= App42Service:merge(signParams,metaHeaderParams)
-    signParams.userList = "["..userList.."]"        
-    queryParams =  Util:buildQueryString(signParams)   
+    signParams.userList = JSON:encode(userList)  
+    queryParams = signParams
+    signParams.userList = JSON:encode(userList)  
     signParams.name = gameName    
     local signature =  Util:sign(App42API:getSecretKey(),signParams)
     App42Log:debug("signature is : "..signature)
@@ -309,11 +309,13 @@ function ScoreBoardService:getTopNRankersByGroup(gameName,userList,callBack)
   if gameName==nil or gameName=="" or Util:trim(gameName)==""  then
     Util:throwExceptionIfNullOrBlank(gameName,"GameName", callBack)
   else
-    local queryParams= {}
+    local queryParams ={}
     local signParams =App42Service:populateSignParams()
     local metaHeaderParams = App42Service:populateMetaHeaderParams()
     local headerParams= App42Service:merge(signParams,metaHeaderParams)
-    signParams.userList = "["..userList.."]"     
+    signParams.userList = JSON:encode(userList)  
+    queryParams = signParams
+    signParams.userList = JSON:encode(userList)  
     signParams.name = gameName    
     local signature =  Util:sign(App42API:getSecretKey(),signParams)
     App42Log:debug("signature is : "..signature)

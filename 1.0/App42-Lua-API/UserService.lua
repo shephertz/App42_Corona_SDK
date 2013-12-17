@@ -6,20 +6,20 @@ local App42Log = require("App42-Lua-API.App42Log")
 local Util  = require("App42-Lua-API.Util")
 local JSON = require("App42-Lua-API.JSON")
 local UserService =  {}
-local orderByDescending = "" 
-local orderByAscending = ""
+local orderByDescending = nil
+local orderByAscending = nil
 local pageOffset = -1
 local pageMaxRecords = -1
 local aclList = {}
-local adminKey = ""
-local fbAccessToken = ""
+local adminKey = nil
+local fbAccessToken = nil
 local sessionId = ""
 local selectKeys = {}
 local otherMetaHeaders = {} 
 local queryParams =  {}    
 local userJson ={}
 local app42 = {}    
-local user =  {}  
+local user =  {} 
 local resource = "user"
 local version = "1.0"
 --Create a User with userName, password & emailAddress in async mode
@@ -178,7 +178,7 @@ function UserService:changeUserPassword(userName,oldPassword,newPassword,callBac
   end
 end
 
-function UserService:resetUserPassword(userName,password,callBack)
+function UserService:resetUserPasswordWithCredentials(userName,password,callBack)
   if userName==nil or userName=="" or Util:trim(userName)=="" or password== nil or password=="" or Util:trim(password)=="" then
     Util:throwExceptionIfNullOrBlank(userName,"UserName", callBack)
     Util:throwExceptionIfNullOrBlank(password,"Password", callBack)
@@ -202,6 +202,28 @@ function UserService:resetUserPassword(userName,password,callBack)
     RestConnector:executePut(resourceURL,queryParams,jsonBody,headerParams,callBack)  
   end
 end
+function UserService:resetUserPassword(userName,callBack)
+  if userName==nil or userName=="" or Util:trim(userName)=="" then
+    Util:throwExceptionIfNullOrBlank(userName,"UserName", callBack)
+  else
+    local signParams =App42Service:populateSignParams()
+    local metaHeaderParams = App42Service:populateMetaHeaderParams()
+    local headerParams = App42Service:merge(signParams,metaHeaderParams)
+    -- Creating the user JSON
+    userJson.userName = userName
+    user.user = userJson
+    app42.app42 = user
+    local jsonBody  = JSON:encode(app42)
+    App42Log:debug("jsonBody is : "..jsonBody)
+    signParams.body =  jsonBody
+    local signature =  Util:sign(App42API:getSecretKey(),signParams)
+    App42Log:debug("signature is : "..signature)
+    headerParams.signature = signature
+    headerParams.resource = resource
+    local resourceURL = version.."/"..resource.."/resetAppUserPassword"
+    RestConnector:executePut(resourceURL,queryParams,jsonBody,headerParams,callBack)  
+  end
+end
 
 function UserService:getAllUsers(callBack)
   local signParams =App42Service:populateSignParams()
@@ -211,6 +233,112 @@ function UserService:getAllUsers(callBack)
   App42Log:debug("signature is : "..signature)
   headerParams.signature = signature
   local resourceURL = version.."/"..resource
+  headerParams.isArray = "true"
+  headerParams.resource = resource
+  RestConnector:executeGet(resourceURL,queryParams,headerParams,callBack)
+end
+function UserService:getAllUsersCount(callBack)
+  local signParams =App42Service:populateSignParams()
+  local metaHeaderParams = App42Service:populateMetaHeaderParams()
+  local headerParams = App42Service:merge(signParams,metaHeaderParams)
+  local signature =  Util:sign(App42API:getSecretKey(),signParams)
+  App42Log:debug("signature is : "..signature)
+  headerParams.signature = signature
+  local resourceURL = version.."/"..resource.."/count/all"
+  headerParams.resource = resource
+  RestConnector:executeGet(resourceURL,queryParams,headerParams,callBack)
+end
+function UserService:getAllUsersByPaging(max,offset,callBack)
+  local signParams =App42Service:populateSignParams()
+  local metaHeaderParams = App42Service:populateMetaHeaderParams()
+  local headerParams = App42Service:merge(signParams,metaHeaderParams)
+  signParams.max = max
+  signParams.offset = offset
+  local signature =  Util:sign(App42API:getSecretKey(),signParams)
+  App42Log:debug("signature is : "..signature)
+  headerParams.signature = signature
+  local resourceURL = version.."/"..resource.."/paging".."/"..max.."/"..offset
+  headerParams.isArray = "true"
+  headerParams.resource = resource
+  RestConnector:executeGet(resourceURL,queryParams,headerParams,callBack)
+end
+function UserService:lockUser(userName,callBack)
+  if userName == nil or userName == "" or Util:trim(userName) == ""  then
+      Util:throwExceptionIfNullOrBlank(userName,"UserName", callBack)
+   else
+      local signParams =App42Service:populateSignParams()
+      local metaHeaderParams = App42Service:populateMetaHeaderParams()
+      local headerParams = App42Service:merge(signParams,metaHeaderParams)
+      userJson.userName = userName    
+      user.user = userJson
+      app42.app42 = user
+      local jsonBody  = JSON:encode(app42)
+      App42Log:debug("jsonBody is : "..jsonBody)
+      signParams.body =  jsonBody
+      local signature =  Util:sign(App42API:getSecretKey(),signParams)
+      App42Log:debug("signature is : "..signature)
+      headerParams.signature = signature
+      headerParams.resource = resource
+      local resourceURL = version .."/".. resource.."/lock"
+      RestConnector:executePut(resourceURL,queryParams,jsonBody,headerParams,callBack) 
+  end
+end
+function UserService:unlockUser(userName,callBack)
+  if userName == nil or userName == "" or Util:trim(userName) == ""  then
+      Util:throwExceptionIfNullOrBlank(userName,"UserName", callBack)
+   else
+      local signParams =App42Service:populateSignParams()
+      local metaHeaderParams = App42Service:populateMetaHeaderParams()
+      local headerParams = App42Service:merge(signParams,metaHeaderParams)
+      userJson.userName = userName    
+      user.user = userJson
+      app42.app42 = user
+      local jsonBody  = JSON:encode(app42)
+      App42Log:debug("jsonBody is : "..jsonBody)
+      signParams.body =  jsonBody
+      local signature =  Util:sign(App42API:getSecretKey(),signParams)
+      App42Log:debug("signature is : "..signature)
+      headerParams.signature = signature
+      headerParams.resource = resource
+      local resourceURL = version .."/".. resource.."/unlock"
+      RestConnector:executePut(resourceURL,queryParams,jsonBody,headerParams,callBack) 
+  end
+end
+function UserService:getLockedUsers(callBack)
+  local signParams =App42Service:populateSignParams()
+  local metaHeaderParams = App42Service:populateMetaHeaderParams()
+  local headerParams = App42Service:merge(signParams,metaHeaderParams)
+  local signature =  Util:sign(App42API:getSecretKey(),signParams)
+  App42Log:debug("signature is : "..signature)
+  headerParams.signature = signature
+  local resourceURL = version.."/"..resource.."/locked"
+  headerParams.isArray = "true"
+  headerParams.resource = resource
+  RestConnector:executeGet(resourceURL,queryParams,headerParams,callBack)
+end
+
+function UserService:getLockedUsersCount(callBack)
+  local signParams =App42Service:populateSignParams()
+  local metaHeaderParams = App42Service:populateMetaHeaderParams()
+  local headerParams = App42Service:merge(signParams,metaHeaderParams)
+  local signature =  Util:sign(App42API:getSecretKey(),signParams)
+  App42Log:debug("signature is : "..signature)
+  headerParams.signature = signature
+  local resourceURL = version.."/"..resource.."/count/locked";
+  headerParams.resource = resource
+  RestConnector:executeGet(resourceURL,queryParams,headerParams,callBack)
+end
+
+function UserService:getLockedUsersWithPaging(max,offset,callBack)
+  local signParams =App42Service:populateSignParams()
+  local metaHeaderParams = App42Service:populateMetaHeaderParams()
+  local headerParams = App42Service:merge(signParams,metaHeaderParams)
+  signParams.max = max
+  signParams.offset = offset
+  local signature =  Util:sign(App42API:getSecretKey(),signParams)
+  App42Log:debug("signature is : "..signature)
+  headerParams.signature = signature
+  local resourceURL = version.."/"..resource.."/locked".."/"..max.."/"..offset;
   headerParams.isArray = "true"
   headerParams.resource = resource
   RestConnector:executeGet(resourceURL,queryParams,headerParams,callBack)
@@ -233,7 +361,7 @@ function UserService:getUserByEmailId(emailId,callBack)
     RestConnector:executeGet(resourceURL,queryParams,headerParams,callBack)
   end
 end
-function UserService:logOut(sessionId,callBack)
+function UserService:logout(sessionId,callBack)
   if sessionId == nil or sessionId == "" or Util:trim(sessionId) == "" then
     Util:throwExceptionIfNullOrBlank(sessionId,"SessionId", callBack)    
   else
@@ -242,7 +370,7 @@ function UserService:logOut(sessionId,callBack)
     local headerParams = App42Service:merge(signParams,metaHeaderParams)
     local sessionJson = {}
     local session = {}
-    sessionJson.userName = sessionId
+    sessionJson.id = sessionId
     session.session = sessionJson
     app42.app42 = session
     local jsonBody  = JSON:encode(app42)
@@ -252,7 +380,7 @@ function UserService:logOut(sessionId,callBack)
     App42Log:debug("signature is : "..signature)
     headerParams.signature = signature
     local resourceURL = version .."/".. "session"
-    RestConnector:executePost(resourceURL,queryParams,jsonBody,headerParams,callBack) 
+    RestConnector:executePut(resourceURL,queryParams,jsonBody,headerParams,callBack) 
   end
 end
 function UserService:createOrUpdateProfile(userObj,callBack)

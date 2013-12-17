@@ -9,28 +9,27 @@ local resource = "game/reward"
 local version = "1.0"  
 local RewardService =  {}
 local queryParams =  {}    
-local rewardJson ={}
-local app42 = {}    
-local rewards = {}   
-local reward = {}   
-local orderByDescending = "" 
-local orderByAscending = ""
+local rewardJson = {}
+local app42 =  {}    
+local rewards =  {}   
+local reward =  {}  
+local orderByDescending =  nil 
+local orderByAscending =  nil
 local pageOffset = -1
 local pageMaxRecords = -1
-local aclList = {}
-local adminKey = ""
-local fbAccessToken = ""
-local sessionId = ""
-local selectKeys = {}
-local otherMetaHeaders = {} 
+local aclList =  nil
+local adminKey =  nil
+local fbAccessToken = nil
+local sessionId =  nil
+local selectKeys =  {}
+local otherMetaHeaders =  {} 
 --Creates reward can be Sword, Energy etc. When Reward Points have to be added the 
 --Reward name created using this method has to be specified.
 --rewardName  - The reward that has to be created
 --description - The description of the reward to be created
 --callback - Callback object for success/exception result
 function RewardService:createReward(rewardName,description,callBack)
-   if rewardName == nil or rewardName == "" or Util:trim(rewardName) == "" or description == nil or description == "" or 
-    Util:trim(description) == "" then
+   if rewardName == nil or rewardName == "" or Util:trim(rewardName) == "" or description == nil or description == "" or Util:trim(description) == "" then
       Util:throwExceptionIfNullOrBlank(rewardName,"RewardName", callBack)
       Util:throwExceptionIfNullOrBlank(description,"Description", callBack)
   else
@@ -84,7 +83,7 @@ end
 --max - Maximum number of records to be fetched
 --offset - From where the records are to be fetched  
 --callback - Callback object for success/exception result
-function RewardService:getAllRewardsByPaging(max,offset,callBack)
+function RewardService:getAllRewardsWithPaging(max,offset,callBack)
   local signParams =App42Service:populateSignParams()
   local metaHeaderParams = App42Service:populateMetaHeaderParams()
   local headerParams= App42Service:merge(signParams,metaHeaderParams)  
@@ -203,7 +202,7 @@ function RewardService:getGameRewardPointsForUser(gameName,userName,callBack)
     local signature =  Util:sign(App42API:getSecretKey(),signParams)
     App42Log:debug("signature is : "..signature)
     headerParams.signature = signature
-  headerParams.isArray = "true"
+    headerParams.isArray = "true"
     headerParams.resource = resource
     local resourceURL = version.."/"..resource .."/"..gameName.."/"..userName
     RestConnector:executeGet(resourceURL,queryParams,headerParams,callBack)

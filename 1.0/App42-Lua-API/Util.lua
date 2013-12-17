@@ -8,7 +8,6 @@ function Util:buildQueryString(queryParams)
   local stringRequest = ""
     for stringKey, stringValue in sortKeyByValue(queryParams) do
       stringRequest= stringRequest..Util:urlEncode(stringKey).."="..Util:urlEncode(stringValue).."&"
-      App42Log.debug("Setting value : "..stringKey.."    :   "..stringValue)
       end
   return stringRequest
 end
@@ -128,6 +127,7 @@ end
  
 function Util:sign(secretKey,signParams)
   local paramString  = ""
+  App42Log:debug("SignParams is : "..JSON:encode(signParams))
     for key, value in sortKeyByValue(signParams) do
       paramString = paramString..key..value
     end

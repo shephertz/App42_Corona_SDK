@@ -26,7 +26,6 @@ function App42API:getDefaultACL()
 end
 function App42API:setDefaultACL(_defaultACL)
   local acl = Util:buildAclRequest(_defaultACL)
-  print(acl)
   defaultACL = acl
 end
 function App42API:getLoggedInUser() 

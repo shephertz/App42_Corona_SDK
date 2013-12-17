@@ -12,10 +12,10 @@ function Score:new()
   self.__index = self
   return o
 end
-function Score:getFacebookList()
+function Score:getFacebookProfile()
     return self.facebookArrayList
 end
-function Score:setFacebookList(_facebookArrayList)
+function Score:setFacebookProfile(_facebookArrayList)
     self.facebookArrayList = _facebookArrayList  
 end
 function Score:getCreatedOn()
