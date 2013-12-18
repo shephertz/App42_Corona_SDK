@@ -28,6 +28,12 @@ end
 function App42Service:setAdminKey(_adminKey)
   adminKey =  _adminKey
 end		
+function App42Service:getSessionId()
+  return sessionId
+end		
+function App42Service:setSessionId(_sessionId)
+  sessionId =  _sessionId
+end		
 function App42Service:getEvent()
   return event
 end		
