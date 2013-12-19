@@ -310,6 +310,7 @@ function RewardService:getTopNRewardEarnersByGroup(gameName,rewardName,userList,
     local resourceURL = version.."/"..resource.."/"..gameName.."/"..rewardName.."/".."group/points"
     RestConnector:executeGet(resourceURL,queryParams,headerParams,callBack)
   end
+end
 function RewardService:getFbAccessToken()
   return fbAccessToken
 end		
@@ -379,6 +380,5 @@ end
 function RewardService:setPageOffset(_pageOffset)
   App42Service:setPageOffset(_pageOffset)
   pageOffset = _pageOffset
-end
 end
 return RewardService
