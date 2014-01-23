@@ -67,4 +67,8 @@ function App42API:buildRewardService()
   local rewardService  = require("App42-Lua-API.RewardService")
   return rewardService
 end
+function App42API:buildPushNotificationService()
+  local pushNotificationService  = require("App42-Lua-API.PushNotificationService")
+  return pushNotificationService
+end
 return App42API

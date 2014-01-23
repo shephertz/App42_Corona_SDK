@@ -8,11 +8,7 @@ local JSON = require("App42-Lua-API.JSON")
 local resource = "game/reward"
 local version = "1.0"  
 local RewardService =  {}
-local queryParams =  {}    
-local rewardJson = {}
-local app42 =  {}    
-local rewards =  {}   
-local reward =  {}  
+local queryParams =  {}  
 local orderByDescending =  nil 
 local orderByAscending =  nil
 local pageOffset = -1
@@ -35,7 +31,11 @@ function RewardService:createReward(rewardName,description,callBack)
   else
     local signParams =App42Service:populateSignParams()
     local metaHeaderParams = App42Service:populateMetaHeaderParams()
-    local headerParams = App42Service:merge(signParams,metaHeaderParams)
+    local headerParams = App42Service:merge(signParams,metaHeaderParams)  
+    local rewardJson = {}
+    local app42 =  {}    
+    local rewards =  {}   
+    local reward =  {}  
     rewardJson.name = rewardName    
     rewardJson.description = description
     reward.reward = rewardJson
@@ -131,7 +131,11 @@ function RewardService:earnRewards(gameName,userName,rewardName,rewardPoints,cal
   else
     local signParams =App42Service:populateSignParams()
     local metaHeaderParams = App42Service:populateMetaHeaderParams()
-    local headerParams = App42Service:merge(signParams,metaHeaderParams)
+    local headerParams = App42Service:merge(signParams,metaHeaderParams)  
+    local rewardJson = {}
+    local app42 =  {}    
+    local rewards =  {}   
+    local reward =  {}  
     rewardJson.name = rewardName    
     rewardJson.gameName = gameName
     rewardJson.userName = userName
@@ -165,7 +169,11 @@ function RewardService:redeemRewards(gameName,userName,rewardName,rewardPoints,c
   else
     local signParams =App42Service:populateSignParams()
     local metaHeaderParams = App42Service:populateMetaHeaderParams()
-    local headerParams = App42Service:merge(signParams,metaHeaderParams)
+    local headerParams = App42Service:merge(signParams,metaHeaderParams)  
+    local rewardJson = {}
+    local app42 =  {}    
+    local rewards =  {}   
+    local reward =  {}  
     rewardJson.name = rewardName    
     rewardJson.gameName = gameName
     rewardJson.userName = userName
@@ -310,7 +318,6 @@ function RewardService:getTopNRewardEarnersByGroup(gameName,rewardName,userList,
     local resourceURL = version.."/"..resource.."/"..gameName.."/"..rewardName.."/".."group/points"
     RestConnector:executeGet(resourceURL,queryParams,headerParams,callBack)
   end
-end
 function RewardService:getFbAccessToken()
   return fbAccessToken
 end		
@@ -380,5 +387,6 @@ end
 function RewardService:setPageOffset(_pageOffset)
   App42Service:setPageOffset(_pageOffset)
   pageOffset = _pageOffset
+end
 end
 return RewardService

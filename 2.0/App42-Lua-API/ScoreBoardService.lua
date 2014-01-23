@@ -18,11 +18,6 @@ local sessionId = nil
 local selectKeys = {}
 local otherMetaHeaders = {}
 local ScoreBoardService = {}
-local scoresJson = {}
-local scoreJson = {}
-local gameJson = {}
-local app42 = {}    
-local game = {}
 --Saves the User score for a game in async mode.
 --gameName - Name of the game for which score has to be saved
 --userName - The user for which score has to be saved
@@ -36,7 +31,12 @@ function ScoreBoardService:saveUserScore(gameName,userName,gameScore,callBack)
       local queryParams= {}
       local signParams =App42Service:populateSignParams()
       local metaHeaderParams = App42Service:populateMetaHeaderParams()
-      local headerParams = App42Service:merge(signParams,metaHeaderParams)
+      local headerParams = App42Service:merge(signParams,metaHeaderParams)      
+      local scoresJson = {}
+      local scoreJson = {}
+      local gameJson = {}
+      local app42 = {}    
+      local game = {}
       scoreJson.userName = userName
       scoreJson.value = gameScore
       scoresJson.score = scoreJson
@@ -67,7 +67,7 @@ function ScoreBoardService:getScoresByUser(gameName,userName,callBack)
     local queryParams= {}
     local signParams =App42Service:populateSignParams()
     local metaHeaderParams = App42Service:populateMetaHeaderParams()
-    headerParams= App42Service:merge(signParams,metaHeaderParams)
+    local headerParams= App42Service:merge(signParams,metaHeaderParams)
     signParams.userName = userName    
     signParams.name = gameName 
     local signature =  Util:sign(App42API:getSecretKey(),signParams)
@@ -336,7 +336,12 @@ function ScoreBoardService:editScoreValueById(scoreId,gameScore,callBack)
       local queryParams= {}
       local signParams =App42Service:populateSignParams()
       local metaHeaderParams = App42Service:populateMetaHeaderParams()
-      local headerParams = App42Service:merge(signParams,metaHeaderParams)
+      local headerParams = App42Service:merge(signParams,metaHeaderParams)    
+      local scoresJson = {}
+      local scoreJson = {}
+      local gameJson = {}
+      local app42 = {}    
+      local game = {}
       scoreJson.scoreId = scoreId
       scoreJson.value = gameScore
       scoresJson.score = scoreJson
@@ -380,6 +385,25 @@ function ScoreBoardService:getTopNRankersFromFacebook(gameName,fbAccessToken,max
     RestConnector:executeGet(resourceURL,queryParams,headerParams,callBack)
   end
 end
+function ScoreBoardService:getTopNTargetRankers(gameName,max,callBack)
+if gameName==nil or gameName=="" or Util:trim(gameName)==""  then
+    Util:throwExceptionIfNullOrBlank(gameName,"GameName", callBack)
+  else
+    local queryParams= {}
+    local signParams =App42Service:populateSignParams()
+    local metaHeaderParams = App42Service:populateMetaHeaderParams()
+    local headerParams= App42Service:merge(signParams,metaHeaderParams)
+    signParams.name = gameName 
+    signParams.max = max 
+    local signature =  Util:sign(App42API:getSecretKey(),signParams)
+    App42Log:debug("signature is : "..signature)
+    headerParams.signature = signature
+    headerParams.resource = resource
+      local resourceURL = version.."/"..resource .."/"..gameName.."/targetedrankers/"..max
+    RestConnector:executeGet(resourceURL,queryParams,headerParams,callBack)
+ end
+end
+
 function ScoreBoardService:getFbAccessToken()
   return fbAccessToken
 end		

@@ -1,5 +1,6 @@
 --author Himanshu Sharma
 local RestConnector = {}
+local PushNotificationResponseBuilder  = require("App42-Lua-API.PushNotificationResponseBuilder")
 local StorageResponseBuilder  = require("App42-Lua-API.StorageResponseBuilder")
 local App42ExceptionRequest = require("App42-Lua-API.App42ExceptionRequest")
 local RewardResponseBuilder  = require("App42-Lua-API.RewardResponseBuilder")
@@ -213,6 +214,8 @@ function RestConnector:successRequest(event,headerParams)
         else 
           response = GameResponseBuilder:buildResponse(event.response)
         end
+      elseif headerParams.resource == "push" then
+          response = PushNotificationResponseBuilder:buildResponse(event.response)
       elseif headerParams.resource == "game/reward" then
         if headerParams.isArray == "true" then
           response = RewardResponseBuilder:buildArrayResponse(event.response)

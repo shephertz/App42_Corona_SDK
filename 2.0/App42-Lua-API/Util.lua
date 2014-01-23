@@ -61,13 +61,13 @@ function Util:isValidEmailAddress(object,callBack)
   end
 end
 function Util:getUTCFormattedTimestamp() 
-  local time = os.date("*t")
   local timStamp = ""
-  local monthString = time.month    
-  local dayString = time.day
-  local hourString = time.hour
-  local minString = time.min
-  local secString = time.sec
+  local year  = os.date("!%Y")
+  local monthString = os.date("!%m")   
+  local dayString = os.date("!%d")
+  local hourString = os.date("!%H")
+  local minString = os.date("!%M")
+  local secString = os.date("!%S")
   if(string.len(monthString) == 1) then
     monthString = "0"..monthString
   end
@@ -83,7 +83,7 @@ function Util:getUTCFormattedTimestamp()
   if(string.len(secString) == 1) then
     secString = "0"..secString
   end
-    timStamp = time.year.."-"..monthString.."-"..dayString.."T"..hourString..":"..minString..":"..secString..".".."000Z"
+    timStamp = year.."-"..monthString.."-"..dayString.."T"..hourString..":"..minString..":"..secString..".".."000Z"
     return timStamp
  end
  

@@ -1,5 +1,5 @@
 --author Himanshu Sharma
 GeoOperator = {
-    ["NEAR"] = "$near";
-    ["WITHIN"] = "$within";
-  }
+  ["NEAR"] = "$near";
+  ["WITHIN"] = "$within";
+}
