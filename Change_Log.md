@@ -1,4 +1,4 @@
-* [Release Version 2.1](https://github.com/shephertz/ App42_Corona_SDK/blob/master/Change_Log.md#version-21)
+* [Release Version 2.1](https://github.com/shephertz/App42_Corona_SDK/blob/master/Change_Log.md#version-21)
 
 ## Version 2.1
 
