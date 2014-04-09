@@ -1,4 +1,49 @@
+* [Release Version 2.2](https://github.com/shephertz/App42_Corona_SDK/blob/master/Change_Log.md#version-22)
 * [Release Version 2.1](https://github.com/shephertz/App42_Corona_SDK/blob/master/Change_Log.md#version-21)
+
+## Version 2.2
+
+**Release Date:** 09-04-2014 
+
+**Release Version:** 2.2
+
+**The following features have been pushed :**
+
+```
+New NokiaX enum added in push DeviceType.
+```
+
+**The following Services have been pushed to the latest :**
+
+```
+SESSION SERVICE
+SOCIAL SERVICE
+```
+
+**The following features have been pushed to the services :**
+
+**User SERVICE**
+
+```
+getUsersByGroup
+createUserWithProfile
+```
+
+**PUSH NOTIFICATION SERVICE**
+
+```
+sendPushMessageToDevice
+deleteAllDevices
+unsubscribeDevice
+resubscribeDevice
+```
+
+**This release contains the following bug fix:**
+
+```
+None
+```
+
 
 ## Version 2.1
 
