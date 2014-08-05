@@ -1,5 +1,48 @@
+* [Release Version 2.3](https://github.com/shephertz/App42_Corona_SDK/blob/master/Change_Log.md#version-23)
 * [Release Version 2.2](https://github.com/shephertz/App42_Corona_SDK/blob/master/Change_Log.md#version-22)
 * [Release Version 2.1](https://github.com/shephertz/App42_Corona_SDK/blob/master/Change_Log.md#version-21)
+
+## Version 2.3
+
+**Release Date:** 05-08-2014
+
+**Release Version:** 2.3
+
+**The following Services have been pushed to the latest :**
+
+```
+EMAIL SERVICE
+TIMER SERVICE
+UPLOAD SERVICE
+```
+
+**The following features have been pushed to the services :**
+
+**User SERVICE**
+
+```
+getUsersByGroup
+createUserWithProfile
+```
+
+**PUSH NOTIFICATION SERVICE**
+
+```
+updatePushBadgeforDevice
+updatePushBadgeforUser
+clearAllBadgeCount
+deleteChannel
+getChannelUsersCount
+getChannelUsers
+getUserSubscribedChannelsCount
+getUserSubscribedChannels
+```
+
+**This release contains the following bug fix:**
+
+```
+None
+```
 
 ## Version 2.2
 
