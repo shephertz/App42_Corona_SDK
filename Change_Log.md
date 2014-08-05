@@ -18,13 +18,6 @@ UPLOAD SERVICE
 
 **The following features have been pushed to the services :**
 
-**User SERVICE**
-
-```
-getUsersByGroup
-createUserWithProfile
-```
-
 **PUSH NOTIFICATION SERVICE**
 
 ```
