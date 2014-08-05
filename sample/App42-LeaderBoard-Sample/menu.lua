@@ -16,12 +16,12 @@ local profileCallBack = {}
 local userProfileObject = {}
 function leaderBoardCallBack:onSuccess(object)
   if object:getName() ~= nil then
-   -- statusHeaderText.text =  "Rank ".."    User Name ".. "        Score    "
-    --statusText.text =  "1         "..object:getScoreList()[1]:getUserName().. "          "..object:getScoreList()[1]:getValue()..       "\n"..
---    "2         "..object:getScoreList()[2]:getUserName().. "               "..object:getScoreList()[2]:getValue().."\n"..
---    "3         "..object:getScoreList()[3]:getUserName().. "              "..object:getScoreList()[3]:getValue().."\n"..
---    "4         "..object:getScoreList()[4]:getUserName().. "       "..object:getScoreList()[4]:getValue().."\n"..
---    "5         "..object:getScoreList()[5]:getUserName().. "           "..object:getScoreList()[5]:getValue()
+    statusHeaderText.text =  "Rank ".."    User Name ".. "        Score    "
+    statusText.text =  "1         "..object:getScoreList()[1]:getUserName().. "          "..object:getScoreList()[1]:getValue()..       "\n"..
+   "2         "..object:getScoreList()[2]:getUserName().. "               "..object:getScoreList()[2]:getValue().."\n"..
+   "3         "..object:getScoreList()[3]:getUserName().. "              "..object:getScoreList()[3]:getValue().."\n"..
+   "4         "..object:getScoreList()[4]:getUserName().. "       "..object:getScoreList()[4]:getValue().."\n"..
+   "5         "..object:getScoreList()[5]:getUserName().. "           "..object:getScoreList()[5]:getValue()
   end
 end
 function leaderBoardCallBack:onException(object)

@@ -143,7 +143,7 @@ function loginScene:createScene( event )
     cornerRadius = 4,
     onEvent = function(event) 
       if "ended" == event.phase then
-        userService:createUser(userNameTextField,passTextField,emailTextField,userResponseCallBack)
+       userService:createUser(userNameTextField,passTextField,emailTextField,userResponseCallBack)
       end
     end
   }
@@ -156,7 +156,7 @@ function loginScene:createScene( event )
     cornerRadius = 2,
     onEvent = function(event) 
       if "ended" == event.phase then
-        userService:authenticate("we","123",authUserResponseCallBack)
+        userService:authenticate(loginNameField,loginPasswordField,authUserResponseCallBack)
       end
     end
   }
