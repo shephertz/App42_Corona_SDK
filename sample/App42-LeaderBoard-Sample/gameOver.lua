@@ -10,7 +10,7 @@ function gameOverScene:createScene( event )
 	screenGroup:insert( image )
 	statusText = display.newText("", 0, 0, native.systemFontBold, 16 )
 	statusText:setTextColor( 255 )
-	statusText:setReferencePoint( display.CenterReferencePoint )
+	--statusText:setReferencePoint( display.CenterReferencePoint )
 	statusText.x, statusText.y = display.contentWidth * 0.5, 50
 	screenGroup:insert( statusText )
   playAgainButton =  require("widget").newButton

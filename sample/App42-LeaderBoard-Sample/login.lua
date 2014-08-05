@@ -33,35 +33,35 @@ local function fieldHandler( event )
   end  
 return true
 end     
-  local nameLabel = display.newText ( "Name:", 100, 80, native.systemFontBold, 14)
-  local passwordLabel = display.newText ( "Password:", 100, 120, native.systemFontBold, 14)
-  local emailLabel = display.newText ( "Email:", 100, 160, native.systemFontBold, 14)
-  local locginNameLabel = display.newText ( "Name:", 10, 240, native.systemFontBold, 14)
-  local loginPasswordLabel = display.newText ( "Password:", 180, 240, native.systemFontBold, 14)
+  local nameLabel = display.newText ( "Name:", 80, 80, native.systemFontBold, 14)
+  local passwordLabel = display.newText ( "Password:", 80, 120, native.systemFontBold, 14)
+  local emailLabel = display.newText ( "Email:", 80, 160, native.systemFontBold, 14)
+  local locginNameLabel = display.newText ( "Name:", 30, 240, native.systemFontBold, 14)
+  local loginPasswordLabel = display.newText ( "Password:", 210, 240, native.systemFontBold, 14)
 
-  loginNameField = native.newTextField( 10, 270, 140, 30)
+  loginNameField = native.newTextField( 80, 270, 140, 30)
   loginNameField:addEventListener("userInput", fieldHandler)
   loginNameField.inputType = "default"
   loginNameField.name = "loginNameField"
 
-  loginPasswordField = native.newTextField( 180, 270, 140, 30)
+  loginPasswordField = native.newTextField( 240, 270, 140, 30)
   loginPasswordField:addEventListener("userInput", fieldHandler)
   loginPasswordField.inputType = "default"
   loginPasswordField.isSecure = true
   loginPasswordField.name = "loginPasswordField"
   
-  nameField = native.newTextField( 180, 80, 180, 30)
+  nameField = native.newTextField( 220, 80, 180, 30)
   nameField:addEventListener("userInput", fieldHandler)
   nameField.inputType = "default"
   nameField.name = "nameField"
 
-  passwordField = native.newTextField( 180, 120, 180, 30)
+  passwordField = native.newTextField( 220, 120, 180, 30)
   passwordField:addEventListener("userInput", fieldHandler)
   passwordField.inputType = "default"
   passwordField.isSecure = true
   passwordField.name = "passwordField"
 
-  emailField = native.newTextField( 180, 160, 180, 30)
+  emailField = native.newTextField( 220, 160, 180, 30)
   emailField:addEventListener("userInput", fieldHandler)
   emailField.inputType = "email"
   emailField.name = "emailField"
@@ -121,12 +121,12 @@ function authUserResponseCallBack:onException(object)
 end
 function loginScene:createScene( event )
 	local screenGroup = self.view	
- image = display.newImage( "images/background.png" )
+  image = display.newImage( "images/background.png" )
 	screenGroup:insert( image )
 	exceptionText = display.newText("", 0, 0, native.systemFontBold, 16 )
 	statusText = display.newText("", 0, 0, native.systemFontBold, 16 )
 	statusText:setTextColor( 250, 20, 0 )
-	statusText:setReferencePoint( display.CenterReferencePoint )
+	--statusText:setReferencePoint( display.CenterReferencePoint )
 	statusText.x, statusText.y = display.contentWidth * 0.5, 220
 	exceptionText.x, exceptionText.y = display.contentWidth * 0.5, 50
   local headerTitle = display.newText("App42 + Space Monkey",0,0,native.systemFontBold,25)
@@ -156,7 +156,7 @@ function loginScene:createScene( event )
     cornerRadius = 2,
     onEvent = function(event) 
       if "ended" == event.phase then
-        userService:authenticate(loginUserNameTextField,loginPassTextField,authUserResponseCallBack)
+        userService:authenticate("we","123",authUserResponseCallBack)
       end
     end
   }
