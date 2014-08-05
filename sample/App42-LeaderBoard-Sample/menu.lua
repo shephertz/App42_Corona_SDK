@@ -16,12 +16,12 @@ local profileCallBack = {}
 local userProfileObject = {}
 function leaderBoardCallBack:onSuccess(object)
   if object:getName() ~= nil then
-    statusHeaderText.text =  "Rank ".."    User Name ".. "        Score    "
-    statusText.text =  "1         "..object:getScoreList()[1]:getUserName().. "          "..object:getScoreList()[1]:getValue()..       "\n"..
-    "2         "..object:getScoreList()[2]:getUserName().. "               "..object:getScoreList()[2]:getValue().."\n"..
-    "3         "..object:getScoreList()[3]:getUserName().. "              "..object:getScoreList()[3]:getValue().."\n"..
-    "4         "..object:getScoreList()[4]:getUserName().. "       "..object:getScoreList()[4]:getValue().."\n"..
-    "5         "..object:getScoreList()[5]:getUserName().. "           "..object:getScoreList()[5]:getValue()
+   -- statusHeaderText.text =  "Rank ".."    User Name ".. "        Score    "
+    --statusText.text =  "1         "..object:getScoreList()[1]:getUserName().. "          "..object:getScoreList()[1]:getValue()..       "\n"..
+--    "2         "..object:getScoreList()[2]:getUserName().. "               "..object:getScoreList()[2]:getValue().."\n"..
+--    "3         "..object:getScoreList()[3]:getUserName().. "              "..object:getScoreList()[3]:getValue().."\n"..
+--    "4         "..object:getScoreList()[4]:getUserName().. "       "..object:getScoreList()[4]:getValue().."\n"..
+--    "5         "..object:getScoreList()[5]:getUserName().. "           "..object:getScoreList()[5]:getValue()
   end
 end
 function leaderBoardCallBack:onException(object)
@@ -54,7 +54,7 @@ function profileCallBack:onSuccess(object)
 end
 function logoutUserCallBack:onSuccess(object)
   if object.app42.response.success == true then
-    storyboard.gotoScene( "main", "slideLeft", 800)
+    storyboard.gotoScene( "login", "slideLeft", 800)
   end
 end
 function scene:createScene( event )
@@ -63,11 +63,11 @@ function scene:createScene( event )
 	screenGroup:insert( image )
 	statusText = display.newText("", 0, 0, native.systemFontBold, 16 )
 	statusText:setTextColor( 255 )
-	statusText:setReferencePoint( display.CenterReferencePoint )
+	--statusText:setReferencePoint( display.CenterReferencePoint )
 	statusText.x, statusText.y = display.contentWidth * 0.5, 100
 	statusHeaderText = display.newText("", 0, 0, native.systemFontBold, 16 )
 	statusHeaderText:setTextColor( 255 )
-	statusHeaderText:setReferencePoint( display.CenterReferencePoint )
+	--statusHeaderText:setReferencePoint( display.CenterReferencePoint )
 	statusHeaderText.x, statusText.y = display.contentWidth * 0.45, 100
 	screenGroup:insert( statusHeaderText )
 	screenGroup:insert( statusText )
