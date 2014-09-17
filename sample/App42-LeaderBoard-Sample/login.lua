@@ -12,7 +12,7 @@ local authUserResponseCallBack = {}
 local userService = App42API:buildUserService()
 local loginScene = storyboard.newScene()
 local loginCallBack = {}
-userSessionId = nil
+local userSessionId = nil
 
 local function fieldHandler( event )    
   if ( "began" == event.phase ) then
@@ -156,7 +156,7 @@ function loginScene:createScene( event )
     cornerRadius = 2,
     onEvent = function(event) 
       if "ended" == event.phase then
-        userService:authenticate(loginNameField,loginPasswordField,authUserResponseCallBack)
+        userService:authenticate(loginUserNameTextField,loginPassTextField,authUserResponseCallBack)
       end
     end
   }
