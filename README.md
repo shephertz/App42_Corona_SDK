@@ -11,7 +11,7 @@ App42 Lua SDK files and Corona application samples.
 Third Party licenses used in App42 Corona SDK are listed below.
 
 * [SHA-1] (http://regex.info/blog/lua/sha1)
-* [Writer - Jeffrey Friedl] (jfriedl@yahoo.com)
+* __Writer -__ Jeffrey Friedl (jfriedl@yahoo.com)
 
 
 Visit our [Corona Developer home page](http://api.shephertz.com/app42-dev/corona-backend-apis.php) to learn more about App42 Corona SDK and using our App42 SDK.
