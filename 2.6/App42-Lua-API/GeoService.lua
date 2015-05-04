@@ -34,7 +34,6 @@ function GeoService:createGeoPoints(geoStorageName,geoPointsList,callBack)
       local storage =  {} 
       local pointsObj= {}
       local point = {}
-   print(type(geoPointsList))
       pointsObj.point = geoPointsList;
       geoJson.points = pointsObj    
       geoJson.storageName = geoStorageName    
