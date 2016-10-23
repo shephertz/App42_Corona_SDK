@@ -1,3 +1,4 @@
+* [Release Version 2.7](https://github.com/shephertz/App42_Corona_SDK/blob/master/Change_Log.md#version-27)
 * [Release Version 2.6](https://github.com/shephertz/App42_Corona_SDK/blob/master/Change_Log.md#version-26)
 * [Release Version 2.5](https://github.com/shephertz/App42_Corona_SDK/blob/master/Change_Log.md#version-25)
 * [Release Version 2.4](https://github.com/shephertz/App42_Corona_SDK/blob/master/Change_Log.md#version-24)
@@ -5,6 +6,30 @@
 * [Release Version 2.2](https://github.com/shephertz/App42_Corona_SDK/blob/master/Change_Log.md#version-22)
 * [Release Version 2.1](https://github.com/shephertz/App42_Corona_SDK/blob/master/Change_Log.md#version-21)
 
+## Version 2.7
+
+**Release Date:** 23-10-2016
+
+**Release Version:** 2.7
+
+**The following Services have been pushed to the latest :**
+
+**USER SERVICE**
+
+```
+createUserWithRole
+assignRoles
+getRolesByUser
+getAllRoles
+getUsersByRole
+```
+
+
+**This release contains the following bug fix:**
+
+```
+None
+```
 ## Version 2.6
 
 **Release Date:** 04-05-2015
